@@ -191,7 +191,7 @@ function refresh()
 
 refreshButton.onclick = function() {refresh()};
 
-window.ondevicemotion = function(move) {
+//window.ondevicemotion = function(move) {
 
 	//Acceleration
 	
@@ -230,16 +230,16 @@ window.ondevicemotion = function(move) {
 	ycor = y*Math.cos(alpha)*Math.cos(beta)+x*Math.sin(Math.abs(alpha))-z*Math.sin(Math.abs(beta));
 	zcor = z*Math.cos(beta)*Math.cos(gamma)+y*Math.sin(alpha)-x*Math.sin(gamma);
 	
-	if (countUpdate > updateMax)
-	{
+	//if (countUpdate > updateMax)
+	//{
 		updateLabels();
 		countUpdate = 0;
-	}
+	//}
 	countUpdate++;
 	
 	//zcor = z*Math.cos(beta)*Math.cos(gamma)+y*Math.sin(beta)*Math.cos(gamma)-x*Math.sin(gamma)*Math.cos(beta);
 
-}
+//}
 
 function smooth(input,prev_output)
 {
