@@ -229,9 +229,11 @@ window.ondevicemotion = function(move) {
 	xcor = x*Math.cos(alpha)*Math.cos(gamma)+z*Math.sin(Math.abs(gamma))-y*Math.sin(Math.abs(alpha));
 	ycor = y*Math.cos(alpha)*Math.cos(beta)+x*Math.sin(Math.abs(alpha))-z*Math.sin(Math.abs(beta));
 	zcor = z*Math.cos(beta)*Math.cos(gamma)+y*Math.sin(alpha)-x*Math.sin(gamma);
+	
 	if (countUpdate > updateMax)
 	{
 		updateLabels();
+		countUpdate = 0;
 	}
 	countUpdate++;
 	
