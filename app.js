@@ -140,7 +140,7 @@ window.ondevicemotion = function(move) {
 	//zcor = z*Math.cos(beta)*Math.cos(gamma)+y*Math.sin(beta)*Math.cos(gamma)-x*Math.sin(gamma)*Math.cos(beta);
 }
 
-function smooth(input,prev_output)
+function highPass(input,prev_output)
 {
 	var max = 0;
 	var output = 0;
@@ -148,9 +148,12 @@ function smooth(input,prev_output)
 	{
 		return 0;
 	}
+	var cutoffFrequency = millisecondInterval/1000*5;
+	var alpha = (2*Math.PI*millisecondInterval/1000*cutoffFrequency)/(2*Math.PI*millisecondInterval/1000*cutoffFrequency + 1);
+	
 	//output = 1/timeConstant*millisecondInterval*(input - output) + output;
-	output = 1/timeConstant*millisecondInterval*(input - prev_output) + prev_output;
-	return input;
+	output = alpha*input + (1-alpha)*prev_output;
+	return output;
 }
 
 function Point(x,y,z)
@@ -202,24 +205,24 @@ function degreesToRadians(degrees)
 	return degrees/180*Math.PI;
 }
 
-function smoothAll()
+function highPassAll()
 {
-	x_a = smooth(x_a,prev_x_a);
-	y_a = smooth(y_a,prev_y_a);
-	z_a = smooth(z_a,prev_z_a);
+	x_a = highPass(x_a,prev_x_a);
+	y_a = highPass(y_a,prev_y_a);
+	z_a = highPass(z_a,prev_z_a);
 
-	x_v = smooth(x_v,prev_x_v);
-	y_v = smooth(y_v,prev_y_v);
-	z_v = smooth(z_v,prev_z_v);
+	x_v = highPass(x_v,prev_x_v);
+	y_v = highPass(y_v,prev_y_v);
+	z_v = highPass(z_v,prev_z_v);
 	
-	x_d = smooth(x_d,prev_x_d);
-	y_d = smooth(y_d,prev_y_d);
-	z_d = smooth(z_d,prev_z_d);
+	x_d = highPass(x_d,prev_x_d);
+	y_d = highPass(y_d,prev_y_d);
+	z_d = highPass(z_d,prev_z_d);
 }
 
 function deadReckoning()
 {
-	smoothAll();
+	highPassAll();
 	
 	prev_x_a = x_a;
 	prev_y_a = y_a;
