@@ -187,17 +187,18 @@ function refresh()
 	
 	countUpdate = 0;
 	timeElapsed = 0;
+	updateLabels();
 }
 
 refreshButton.onclick = function() {refresh()};
 
-//window.ondevicemotion = function(move) {
+window.ondevicemotion = function(move) {
 
 	//Acceleration
 	
 	x = move.accelerationIncludingGravity.x;
-	y = move.accelerationIncludingGravity.y;
 	z = move.accelerationIncludingGravity.z;
+	y = move.accelerationIncludingGravity.y;
 	
 	x_a = move.acceleration.x;
 	y_a = move.acceleration.y;
@@ -233,13 +234,13 @@ refreshButton.onclick = function() {refresh()};
 	//if (countUpdate > updateMax)
 	//{
 		updateLabels();
-		countUpdate = 0;
+		//countUpdate = 0;
 	//}
-	countUpdate++;
+	//countUpdate++;
 	
 	//zcor = z*Math.cos(beta)*Math.cos(gamma)+y*Math.sin(beta)*Math.cos(gamma)-x*Math.sin(gamma)*Math.cos(beta);
 
-//}
+}
 
 function smooth(input,prev_output)
 {
