@@ -1,0 +1,21 @@
+h1 {
+text-align: center;
+}
+body {
+background: linear-gradient(white,#abddee,white);
+height:100%;
+background-repeat: no-repeat;
+background-attachment: fixed;
+}
+p {
+}
+table {
+width=95%;
+}
+#footerbar {
+border-color: black;
+}
+#footer {
+text-align: center;
+font-size: x-small;
+}
