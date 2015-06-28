@@ -210,7 +210,7 @@ function highPassAll()
 	x_a = highPass(x_a,prev_x_a);
 	y_a = highPass(y_a,prev_y_a);
 	z_a = highPass(z_a,prev_z_a);
-
+	/*
 	x_v = highPass(x_v,prev_x_v);
 	y_v = highPass(y_v,prev_y_v);
 	z_v = highPass(z_v,prev_z_v);
@@ -218,6 +218,8 @@ function highPassAll()
 	x_d = highPass(x_d,prev_x_d);
 	y_d = highPass(y_d,prev_y_d);
 	z_d = highPass(z_d,prev_z_d);
+	*/
+
 }
 
 function deadReckoning()
