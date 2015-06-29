@@ -224,7 +224,7 @@ function highPassAll()
 
 function deadReckoning()
 {
-	highPassAll();
+	//highPassAll();
 	
 	prev_x_a = x_a;
 	prev_y_a = y_a;
