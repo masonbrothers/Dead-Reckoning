@@ -281,7 +281,8 @@ function drawGraph()
 	var xMax = 1.5;
 	var yMin = -1.5;
 	var yMax = 1.5;
-	
+		
+	//print x axis
 	graph.beginPath();
 	var xStart = transformX(0,xMin,xMax);
 	var yStart = transformY(0,yMin,yMax);
@@ -293,6 +294,7 @@ function drawGraph()
 	graph.strokeStyle = "#FF0000";
 	graph.stroke();
 	
+	//print y axis
 	graph.beginPath();
 	var xStart = transformX(0,xMin,xMax);
 	var yStart = transformY(0,yMin,yMax);
@@ -304,6 +306,7 @@ function drawGraph()
 	graph.strokeStyle = "#00FF00";
 	graph.stroke();
 	
+	//print z axis
 	graph.beginPath();
 	var xStart = transformX(0,xMin,xMax);
 	var yStart = transformY(0,yMin,yMax);
