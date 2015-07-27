@@ -129,9 +129,16 @@ window.ondevicemotion = function(move) {
 	ycor = y*Math.cos(gamma)*Math.cos(alpha);// + x*Math.cos(gamma)*Math.cos(beta)*Math.sin(alpha);
 	zcor = z*Math.cos(beta); // + y*Math.sin(beta)*Math.sin(gamma) + x*Math.cos(gamma)*Math.sin(beta);
 	*/
+	/*
 	xcor = x*Math.cos(alpha)*Math.cos(gamma)+z*Math.sin(Math.abs(gamma))-y*Math.sin(Math.abs(alpha));
 	ycor = y*Math.cos(alpha)*Math.cos(beta)+x*Math.sin(Math.abs(alpha))-z*Math.sin(Math.abs(beta));
 	zcor = z*Math.cos(beta)*Math.cos(gamma)+y*Math.sin(alpha)-x*Math.sin(gamma);
+	*/
+	var accelerationVector = [0,0,0];
+	accelerationVector = rotate_point(accelerationVector,degreesToRadians(betaDeg),degreesToRadians(gammaDeg),degreesToRadians(alphaDeg));
+	xcor = accelerationVector[0];
+	ycor = accelerationVector[1];
+	zcor = accelerationVector[2];
 	//if (countUpdate > updateMax)
 	//{
 	updateLabels();
@@ -243,7 +250,7 @@ function updateLabels()
 	periodlabel.innerHTML = millisecondInterval/1000;
 	speedlabel.innerHTML = v*3.6;
 	
-	updateGraph(degreesToRadians(-betaDeg),degreesToRadians(-gammaDeg),degreesToRadians(-alphaDeg));
+	updateGraph(degreesToRadians(betaDeg),degreesToRadians(gammaDeg),degreesToRadians(alphaDeg));
 }
 
 setInterval(function() {deadReckoning()}, millisecondInterval);
@@ -317,6 +324,31 @@ function drawGraph()
 	graph.lineWidth = 2;
 	graph.strokeStyle = "#0000FF";
 	graph.stroke();
+	
+	//draw triangle
+	graph.beginPath();
+	
+	var xEnd = transformX(xEndPoint[0],xMin,xMax);
+	var yEnd = transformY(xEndPoint[1],yMin,yMax);
+	graph.moveTo(xEnd,yEnd);
+
+	var xEnd = transformX(yEndPoint[0],xMin,xMax);
+	var yEnd = transformY(yEndPoint[1],yMin,yMax);
+	graph.lineTo(xEnd,yEnd);
+
+	var xEnd = transformX(zEndPoint[0],xMin,xMax);
+	var yEnd = transformY(zEndPoint[1],yMin,yMax);
+	graph.lineTo(xEnd,yEnd);
+	
+	graph.lineWidth = 2;
+	graph.fillStyle = "rgba(0,0,0,0.2)";
+	graph.strokeStyle = "rgba(0,0,0,0.2)";
+	graph.stroke();
+	
+	
+	
+	
+	
 }
 
 function transformX(x,xMin,xMax)
@@ -369,27 +401,43 @@ function updateGraph(xAngle,yAngle,zAngle)
 	yEndPoint = [0,1,0];
 	zEndPoint = [0,0,1];
 	
+	xEndPoint = rotate_point(xEndPoint,xAngle,yAngle,zAngle);
+	yEndPoint = rotate_point(yEndPoint,xAngle,yAngle,zAngle);
+	zEndPoint = rotate_point(zEndPoint,xAngle,yAngle,zAngle);
+	
 	/*
 	var xAngle = Math.PI/4;
 	var yAngle = Math.PI/4;
 	var zAngle = Math.PI/4;
 	*/
 	
-	xEndPoint = rotate_y(yAngle,xEndPoint);
-	yEndPoint = rotate_y(yAngle,yEndPoint);
-	zEndPoint = rotate_y(yAngle,zEndPoint);
 	
-	xEndPoint = rotate_x(xAngle,xEndPoint);
-	yEndPoint = rotate_x(xAngle,yEndPoint);
-	zEndPoint = rotate_x(xAngle,zEndPoint);
+	/*
+	xEndPoint = rotate_y(-yAngle,xEndPoint);
+	yEndPoint = rotate_y(-yAngle,yEndPoint);
+	zEndPoint = rotate_y(-yAngle,zEndPoint);
 	
-	xEndPoint = rotate_z(zAngle,xEndPoint);
-	yEndPoint = rotate_z(zAngle,yEndPoint);
-	zEndPoint = rotate_z(zAngle,zEndPoint);
+	xEndPoint = rotate_x(-xAngle,xEndPoint);
+	yEndPoint = rotate_x(-xAngle,yEndPoint);
+	zEndPoint = rotate_x(-xAngle,zEndPoint);
 	
+	xEndPoint = rotate_z(-zAngle,xEndPoint);
+	yEndPoint = rotate_z(-zAngle,yEndPoint);
+	zEndPoint = rotate_z(-zAngle,zEndPoint);
+	*/
 	
 	
 	drawGraph();
+}
+
+function rotate_point(input,xAngle,yAngle,zAngle)
+{
+	var output = input;
+	output = rotate_y(-yAngle,input);
+	
+	output = rotate_x(-xAngle,input);
+	output = rotate_z(-zAngle,input);
+	return output;
 }
 
 updateGraph(Math.PI/4,Math.PI/4,Math.PI/4);
