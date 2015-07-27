@@ -243,7 +243,7 @@ function updateLabels()
 	periodlabel.innerHTML = millisecondInterval/1000;
 	speedlabel.innerHTML = v*3.6;
 	
-	updateGraph(degreesToRadians(betaDeg),degreesToRadians(gammaDeg),degreesToRadians(alphaDeg));
+	updateGraph(degreesToRadians(betaDeg),degreesToRadians(gammaDeg),degreesToRadians(-alphaDeg));
 }
 
 setInterval(function() {deadReckoning()}, millisecondInterval);
@@ -365,6 +365,7 @@ function updateGraph(xAngle,yAngle,zAngle)
 	xEndPoint = [1,0,0];
 	yEndPoint = [0,1,0];
 	zEndPoint = [0,0,1];
+	
 	/*
 	var xAngle = Math.PI/4;
 	var yAngle = Math.PI/4;
