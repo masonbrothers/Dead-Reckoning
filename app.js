@@ -136,6 +136,9 @@ window.ondevicemotion = function(move) {
 	*/
 	
 	var accelerationVector = [0,0,0];
+	accelerationVector[0] = x;
+	accelerationVector[1] = y;
+	accelerationVector[2] = z;
 	accelerationVector = rotate_point(accelerationVector,degreesToRadians(betaDeg),degreesToRadians(gammaDeg),degreesToRadians(alphaDeg));
 	xcor = accelerationVector[0];
 	ycor = accelerationVector[1];
@@ -327,6 +330,7 @@ function drawGraph()
 	graph.stroke();
 	
 	//draw triangle
+	/*
 	graph.beginPath();
 	
 	var xEnd = transformX(xEndPoint[0],xMin,xMax);
@@ -346,7 +350,7 @@ function drawGraph()
 	graph.strokeStyle = "rgba(0,0,0,0.2)";
 	graph.stroke();
 	
-	
+	*/
 	
 	
 	
