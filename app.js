@@ -1,3 +1,4 @@
+//V 0.0.1
 //document.write("<br>start<br>");
 var refreshButton = document.getElementById("refreshButton");
 var actualxalabel = document.getElementById("actualxatag");
@@ -129,9 +130,21 @@ window.ondevicemotion = function(move) {
 	ycor = y*Math.cos(gamma)*Math.cos(alpha);// + x*Math.cos(gamma)*Math.cos(beta)*Math.sin(alpha);
 	zcor = z*Math.cos(beta); // + y*Math.sin(beta)*Math.sin(gamma) + x*Math.cos(gamma)*Math.sin(beta);
 	*/
+	/*
 	xcor = x*Math.cos(alpha)*Math.cos(gamma)+z*Math.sin(Math.abs(gamma))-y*Math.sin(Math.abs(alpha));
 	ycor = y*Math.cos(alpha)*Math.cos(beta)+x*Math.sin(Math.abs(alpha))-z*Math.sin(Math.abs(beta));
 	zcor = z*Math.cos(beta)*Math.cos(gamma)+y*Math.sin(alpha)-x*Math.sin(gamma);
+	*/
+	var accelerationVector = [0,0,0];
+	accelerationVector[0] = accelerationIncludingGravity.x;
+	accelerationVector[1] = accelerationIncludingGravity.y;
+	accelerationVector[2] = accelerationIncludingGravity.z;
+	
+	accelerationVector = rotate_point(accelerationVector,degreesToRadians(betaDeg),degreesToRadians(gammaDeg),degreesToRadians(alphaDeg));
+	xcor = accelerationVector[0];
+	ycor = accelerationVector[1];
+	zcor = accelerationVector[2];
+	
 	//if (countUpdate > updateMax)
 	//{
 	updateLabels();
@@ -371,7 +384,11 @@ function updateGraph(xAngle,yAngle,zAngle)
 	var yAngle = Math.PI/4;
 	var zAngle = Math.PI/4;
 	*/
-	
+	/*
+	xEndPoint = rotate_point(xEndPoint,xAngle,yAngle,zAngle);
+	yEndPoint = rotate_point(yEndPoint,xAngle,yAngle,zAngle);
+	zEndPoint = rotate_point(zEndPoint,xAngle,yAngle,zAngle);
+	*/
 	xEndPoint = rotate_y(yAngle,xEndPoint);
 	yEndPoint = rotate_y(yAngle,yEndPoint);
 	zEndPoint = rotate_y(yAngle,zEndPoint);
@@ -387,6 +404,17 @@ function updateGraph(xAngle,yAngle,zAngle)
 	
 	
 	drawGraph();
+}
+
+
+function rotate_point(input,xAngle,yAngle,zAngle)
+{
+	var output = input;
+	output = rotate_y(-yAngle,input);
+	
+	output = rotate_x(-xAngle,input);
+	output = rotate_z(-zAngle,input);
+	return output;
 }
 
 updateGraph(Math.PI/4,Math.PI/4,Math.PI/4);
