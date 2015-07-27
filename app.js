@@ -134,6 +134,7 @@ window.ondevicemotion = function(move) {
 	ycor = y*Math.cos(alpha)*Math.cos(beta)+x*Math.sin(Math.abs(alpha))-z*Math.sin(Math.abs(beta));
 	zcor = z*Math.cos(beta)*Math.cos(gamma)+y*Math.sin(alpha)-x*Math.sin(gamma);
 	*/
+	
 	var accelerationVector = [0,0,0];
 	accelerationVector = rotate_point(accelerationVector,degreesToRadians(betaDeg),degreesToRadians(gammaDeg),degreesToRadians(alphaDeg));
 	xcor = accelerationVector[0];
