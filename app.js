@@ -129,12 +129,7 @@ window.ondevicemotion = function(move) {
 	ycor = y*Math.cos(gamma)*Math.cos(alpha);// + x*Math.cos(gamma)*Math.cos(beta)*Math.sin(alpha);
 	zcor = z*Math.cos(beta); // + y*Math.sin(beta)*Math.sin(gamma) + x*Math.cos(gamma)*Math.sin(beta);
 	*/
-	xcor = x*Math.cos(alpha)*Math.cos(gamma)+z*Math.sin(Math.abs(gamma))-y*Math.sin(Math.abs(alpha));
-	ycor = y*Math.cos(alpha)*Math.cos(beta)+x*Math.sin(Math.abs(alpha))-z*Math.sin(Math.abs(beta));
-	zcor = z*Math.cos(beta)*Math.cos(gamma)+y*Math.sin(alpha)-x*Math.sin(gamma);
-	//if (countUpdate > updateMax)
-	//{
-	updateLabels();
+	
 	//countUpdate = 0;
 	//}
 	//countUpdate++;
@@ -199,6 +194,14 @@ function deadReckoning()
 	prev_y_d = y_d;
 	prev_z_d = z_d;
 	
+	alpha = degreesToRadians(alphaDeg);
+	beta = degreesToRadians(betaDeg);
+	gamma = degreesToRadians(gammaDeg);
+	
+	xcor = x*Math.cos(alpha)*Math.cos(gamma)+z*Math.sin(Math.abs(gamma))-y*Math.sin(Math.abs(alpha));
+	ycor = y*Math.cos(alpha)*Math.cos(beta)+x*Math.sin(Math.abs(alpha))-z*Math.sin(Math.abs(beta));
+	zcor = z*Math.cos(beta)*Math.cos(gamma)+y*Math.sin(alpha)-x*Math.sin(gamma);
+	
 	a = Math.sqrt(Math.pow(x_a,2) + Math.pow(y_a,2) + Math.pow(z_a,2));
 	x_v += millisecondInterval/1000*x_a;
 	y_v += millisecondInterval/1000*y_a;
@@ -249,14 +252,12 @@ setInterval(function() {deadReckoning()}, millisecondInterval);
 
 window.ondeviceorientation = function(move){
 	//Rotation
-	angle = move.rotationRate;
+	//angle = move.rotationRate;
 	//if (angle != null) {
 	alphaDeg = move.alpha;
 	betaDeg = move.beta;
 	gammaDeg = move.gamma;
-	alpha = degreesToRadians(alphaDeg);
-	beta = degreesToRadians(betaDeg);
-	gamma = degreesToRadians(gammaDeg);
+	
 	//}
 	//updateLabels();
 }
