@@ -218,9 +218,9 @@ function deadReckoning()
 
 function updateLabels()
 {
-	alphalabel.innerHTML = alphaDeg;
-	betalabel.innerHTML = betaDeg;
-	gammalabel.innerHTML = gammaDeg;
+	alphalabel.innerHTML = alpha;
+	betalabel.innerHTML = beta;
+	gammalabel.innerHTML = gamma;
 	xcorlabel.innerHTML = xcor;
 	ycorlabel.innerHTML = ycor;
 	zcorlabel.innerHTML = zcor;
