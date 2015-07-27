@@ -243,10 +243,11 @@ function updateLabels()
 	periodlabel.innerHTML = millisecondInterval/1000;
 	speedlabel.innerHTML = v*3.6;
 	
-	updateGraph(degreesToRadians(alphaDeg),degreesToRadians(betaDeg),degreesToRadians(gammaDeg));
+	updateGraph(degreesToRadians(betaDeg),degreesToRadians(gammaDeg),degreesToRadians(alphaDeg));
 }
 
 setInterval(function() {deadReckoning()}, millisecondInterval);
+setInterval(function() {updateLabels();}, 100);
 
 window.ondeviceorientation = function(move){
 	//Rotation
@@ -289,7 +290,7 @@ function drawGraph()
 	graph.moveTo(xStart,yStart);
 	graph.lineTo(xEnd,yEnd);
 	graph.lineWidth = 2;
-	graph.strokeStyle = "#00FF00";
+	graph.strokeStyle = "#FF0000";
 	graph.stroke();
 	
 	graph.beginPath();
@@ -300,7 +301,7 @@ function drawGraph()
 	graph.moveTo(xStart,yStart);
 	graph.lineTo(xEnd,yEnd);
 	graph.lineWidth = 2;
-	graph.strokeStyle = "#0000FF";
+	graph.strokeStyle = "#00FF00";
 	graph.stroke();
 	
 	graph.beginPath();
@@ -311,7 +312,7 @@ function drawGraph()
 	graph.moveTo(xStart,yStart);
 	graph.lineTo(xEnd,yEnd);
 	graph.lineWidth = 2;
-	graph.strokeStyle = "#FF0000";
+	graph.strokeStyle = "#0000FF";
 	graph.stroke();
 }
 
