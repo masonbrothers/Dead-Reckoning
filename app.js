@@ -243,7 +243,7 @@ function updateLabels()
 	periodlabel.innerHTML = millisecondInterval/1000;
 	speedlabel.innerHTML = v*3.6;
 	
-	updateGraph(degreesToRadians(betaDeg),degreesToRadians(gammaDeg),degreesToRadians(alphaDeg));
+	updateGraph(degreesToRadians(-betaDeg),degreesToRadians(-gammaDeg),degreesToRadians(-alphaDeg));
 }
 
 setInterval(function() {deadReckoning()}, millisecondInterval);
@@ -370,6 +370,11 @@ function updateGraph(xAngle,yAngle,zAngle)
 	var yAngle = Math.PI/4;
 	var zAngle = Math.PI/4;
 	*/
+	
+	xEndPoint = rotate_z(zAngle,xEndPoint);
+	yEndPoint = rotate_z(zAngle,yEndPoint);
+	zEndPoint = rotate_z(zAngle,zEndPoint);
+	
 	xEndPoint = rotate_x(xAngle,xEndPoint);
 	yEndPoint = rotate_x(xAngle,yEndPoint);
 	zEndPoint = rotate_x(xAngle,zEndPoint);
@@ -378,9 +383,7 @@ function updateGraph(xAngle,yAngle,zAngle)
 	yEndPoint = rotate_y(yAngle,yEndPoint);
 	zEndPoint = rotate_y(yAngle,zEndPoint);
 	
-	xEndPoint = rotate_z(zAngle,xEndPoint);
-	yEndPoint = rotate_z(zAngle,yEndPoint);
-	zEndPoint = rotate_z(zAngle,zEndPoint);
+	
 	
 	drawGraph();
 }
