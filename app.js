@@ -243,7 +243,7 @@ function updateLabels()
 	periodlabel.innerHTML = millisecondInterval/1000;
 	speedlabel.innerHTML = v*3.6;
 	
-	updateGraph(degreesToRadians(betaDeg),degreesToRadians(gammaDeg),degreesToRadians(-alphaDeg));
+	updateGraph(degreesToRadians(-betaDeg),degreesToRadians(gammaDeg),degreesToRadians(-alphaDeg));
 }
 
 setInterval(function() {deadReckoning()}, millisecondInterval);
