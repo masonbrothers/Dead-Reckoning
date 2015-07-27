@@ -212,7 +212,7 @@ function deadReckoning()
 	z_d += millisecondInterval/1000*z_v;
 	d = Math.sqrt(Math.pow(x_d,2) + Math.pow(y_d,2) + Math.pow(z_d,2));
 	timeElapsed += millisecondInterval/1000;
-	//updateLabels();
+	updateLabels();
 	//refresh();
 }
 
