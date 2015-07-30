@@ -411,10 +411,9 @@ function updateGraph(xAngle,yAngle,zAngle)
 function rotate_point(input,xAngle,yAngle,zAngle)
 {
 	var output = input;
-	output = rotate_y(-yAngle,output);
-	
-	output = rotate_x(-xAngle,output);
 	output = rotate_z(-zAngle,output);
+	output = rotate_x(-xAngle,output);
+	output = rotate_y(-yAngle,output);
 	return output;
 }
 
