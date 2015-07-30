@@ -139,11 +139,11 @@ window.ondevicemotion = function(move) {
 	accelerationVector[0] = x;
 	accelerationVector[1] = y;
 	accelerationVector[2] = z;
-	var correctedVector = [0,0,0];
-	correctedVector = rotate_point(accelerationVector,degreesToRadians(betaDeg),degreesToRadians(gammaDeg),degreesToRadians(alphaDeg));
-	xcor = 5//correctedVector[0];
-	ycor = 5//correctedVector[1];
-	zcor = 5//correctedVector[2];
+	
+	accelerationVector = rotate_point(accelerationVector,-degreesToRadians(betaDeg),-degreesToRadians(gammaDeg),-degreesToRadians(alphaDeg));
+	xcor = accelerationVector[0];
+	ycor = accelerationVector[1];
+	zcor = accelerationVector[2];
 	
 	//if (countUpdate > updateMax)
 	//{
