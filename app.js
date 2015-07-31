@@ -1,4 +1,4 @@
-//V 0.0.1
+document.getElementById("temp").innerHTML = "V0.0.1"
 //document.write("<br>start<br>");
 var refreshButton = document.getElementById("refreshButton");
 var actualxalabel = document.getElementById("actualxatag");
