@@ -78,6 +78,12 @@ var z_d2 = 0;
 
 var millisecondInterval = 1;
 
+
+var xEndPoint = [1,0,0];
+var yEndPoint = [0,1,0];
+var zEndPoint = [0,0,1];
+
+
 function refresh()
 {
 	x_a = 0;
@@ -150,9 +156,6 @@ window.ondevicemotion = function(move) {
 	var zCorVect = [0,0,0];
 	*/
 	
-	var xCorVect = accelerationVector;
-	var yCorVect = accelerationVector;
-	var zCorVect = accelerationVector;
 	
 	/*
 	accelerationVector = rotate_point(accelerationVector,xAngle,yAngle,zAngle);
@@ -160,6 +163,10 @@ window.ondevicemotion = function(move) {
 	ycor = accelerationVector[1];
 	zcor = accelerationVector[2];
 	*/
+	/*
+	var xCorVect = accelerationVector;
+	var yCorVect = accelerationVector;
+	var zCorVect = accelerationVector;
 	
 	xCorVect = rotate_point(accelerationVector,0,yAngle,zAngle);
 	yCorVect = rotate_point(accelerationVector,xAngle,0,zAngle);
@@ -168,6 +175,16 @@ window.ondevicemotion = function(move) {
 	xcor = xCorVect[0];
 	ycor = yCorVect[1];
 	zcor = zCorVect[2];
+	*/
+	findEndPoints(xAngle,yAngle,zAngle);
+	
+	
+	
+	
+	
+	var xCorVect = dotProduct(xEndPoint,x);
+	var yCorVect = dotProduct(yEndPoint,y);
+	var zCorVect = dotProduct(zEndPoint,z);
 	
 	
 	//if (countUpdate > updateMax)
@@ -308,10 +325,6 @@ var graphLabel = document.getElementById("graphTag");
 var graph = graphLabel.getContext("2d");
  
 
-var xEndPoint = [1,0,0];
-var yEndPoint = [0,1,0];
-var zEndPoint = [0,0,1];
-
 function drawGraph()
 {
 	resetGraph();
@@ -421,7 +434,7 @@ function rotate_z(angle,input)
 	return output;
 }
 
-function updateGraph(xAngle,yAngle,zAngle)
+function findEndPoints(xAngle,yAngle,zAngle)
 {
 	xEndPoint = [1,0,0];
 	yEndPoint = [0,1,0];
@@ -436,7 +449,31 @@ function updateGraph(xAngle,yAngle,zAngle)
 	xEndPoint = rotate_point(xEndPoint,xAngle,yAngle,zAngle);
 	yEndPoint = rotate_point(yEndPoint,xAngle,yAngle,zAngle);
 	zEndPoint = rotate_point(zEndPoint,xAngle,yAngle,zAngle);
-	
+}
+
+function dotProduct(one,two)
+{
+	var minSize = Math.min(one.length,two.length);
+	var output;
+	for (i = 0; i < minSize; i++)
+	{
+		output[i]=one[i]*two[i]
+	}
+	return output;
+}
+
+function crossProduct(one,two)
+{
+	var output;
+	output[0] = one[1]*two[2] - two[1]*one[2];
+	output[1] = two[0]*one[2] - one[0]*two[2];
+	output[2] = one[0]*two[1] - two[0]*one[1];
+	return output;
+}
+
+function updateGraph(xAngle,yAngle,zAngle)
+{
+	findEndPoints(xAngle,yAngle,zAngle);
 	/*
 	xEndPoint = rotate_y(-yAngle,xEndPoint);
 	yEndPoint = rotate_y(-yAngle,yEndPoint);
