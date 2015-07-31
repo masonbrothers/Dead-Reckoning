@@ -140,10 +140,35 @@ window.ondevicemotion = function(move) {
 	accelerationVector[1] = y;
 	accelerationVector[2] = z;
 	
-	accelerationVector = rotate_point(accelerationVector,-degreesToRadians(betaDeg),-degreesToRadians(gammaDeg),-degreesToRadians(alphaDeg));
+	var xAngle = degreesToRadians(betaDeg);
+	var yAngle = degreesToRadians(gammaDeg);
+	var zAngle = degreesToRadians(alphaDeg);
+	
+	/*
+	var xCorVect = [0,0,0];
+	var yCorVect = [0,0,0];
+	var zCorVect = [0,0,0];
+	*/
+	
+	var xCorVect = accelerationVector;
+	var yCorVect = accelerationVector;
+	var zCorVect = accelerationVector;
+	
+	/*
+	accelerationVector = rotate_point(accelerationVector,xAngle,yAngle,zAngle);
 	xcor = accelerationVector[0];
 	ycor = accelerationVector[1];
 	zcor = accelerationVector[2];
+	*/
+	
+	xCorVect = rotate_point(accelerationVector,0,yAngle,zAngle);
+	yCorVect = rotate_point(accelerationVector,xAngle,0,zAngle);
+	zCorVect = rotate_point(accelerationVector,xAngle,yAngle,0);
+	
+	xcor = xCorVect[0];
+	ycor = yCorVect[1];
+	zcor = zCorVect[2];
+	
 	
 	//if (countUpdate > updateMax)
 	//{
@@ -281,7 +306,7 @@ window.ondeviceorientation = function(move){
 
 var graphLabel = document.getElementById("graphTag");
 var graph = graphLabel.getContext("2d");
-
+ 
 
 var xEndPoint = [1,0,0];
 var yEndPoint = [0,1,0];
@@ -294,7 +319,24 @@ function drawGraph()
 	var xMax = 1.5;
 	var yMin = -1.5;
 	var yMax = 1.5;
+	/*
+	if (xEndPoint[2] > yEndPoint[2] && xEndPoint[2] > zEndPoint[2])
+	{
+		if (yEndPoint[2] > zEndPoint])
+		drawXgraph(xMin,xMax,yMin,yMax);
+	}
+	*/
 	
+	drawXgraph(xMin,xMax,yMin,yMax);
+	drawYgraph(xMin,xMax,yMin,yMax);
+	drawZgraph(xMin,xMax,yMin,yMax);
+
+	
+
+}
+
+function drawXgraph(xMin,xMax,yMin,yMax)
+{
 	graph.beginPath();
 	var xStart = transformX(0,xMin,xMax);
 	var yStart = transformY(0,yMin,yMax);
@@ -305,7 +347,10 @@ function drawGraph()
 	graph.lineWidth = 2;
 	graph.strokeStyle = "#FF0000";
 	graph.stroke();
-	
+}
+
+function drawYgraph(xMin,xMax,yMin,yMax)
+{
 	graph.beginPath();
 	var xStart = transformX(0,xMin,xMax);
 	var yStart = transformY(0,yMin,yMax);
@@ -316,7 +361,10 @@ function drawGraph()
 	graph.lineWidth = 2;
 	graph.strokeStyle = "#00FF00";
 	graph.stroke();
-	
+}
+
+function drawZgraph(xMin,xMax,yMin,yMax)
+{
 	graph.beginPath();
 	var xStart = transformX(0,xMin,xMax);
 	var yStart = transformY(0,yMin,yMax);
