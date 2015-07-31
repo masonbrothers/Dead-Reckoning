@@ -176,16 +176,17 @@ window.ondevicemotion = function(move) {
 	ycor = yCorVect[1];
 	zcor = zCorVect[2];
 	*/
+	
+	
 	findEndPoints(xAngle,yAngle,zAngle);
-	
-	
-	
-	
 	
 	var xCorVect = dotProduct(xEndPoint,x);
 	var yCorVect = dotProduct(yEndPoint,y);
 	var zCorVect = dotProduct(zEndPoint,z);
 	
+	xcor = xCorVect[0];
+	ycor = yCorVect[1];
+	zcor = zCorVect[2];
 	
 	//if (countUpdate > updateMax)
 	//{
